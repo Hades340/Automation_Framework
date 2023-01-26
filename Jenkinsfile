@@ -1,8 +1,8 @@
 pipeline {
     agent any
    tools { 
-      maven 'MAVEN_HOME' 
-      jdk 'JAVA_HOME' 
+      maven 'M2_HOME'
+      jdk 'JDK13'
     }
     stages {
         stage('run test automation') {
