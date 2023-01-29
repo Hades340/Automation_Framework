@@ -1,10 +1,10 @@
 {
-  "deviceName": "tên máy ",
-  "udid": "mã máy chạy adb devices",
+  "deviceName": "Pixel 4 API 29",
+  "udid": "emulator-5554",
   "platformName": "Android",
   "platformVersion": "11",
-  "skipUnlock": "true",
-  "appPackage": "com.isinolsun.app",
-  "appActivity": "com.isinolsun.app.activities.SplashActivity",
-  "noReset": "true"
+  "skipUnlock": true,
+  "appPackage": "com.trungdv123.redditApp",
+  "appActivity": "com.trungdv123.redditApp.MainActivity",
+  "noReset": true
 }

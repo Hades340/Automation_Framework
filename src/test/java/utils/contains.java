@@ -35,7 +35,7 @@ public class contains {
 	public static final MediaType MEDIA_TYPE_VIDEO = MediaType.parse("video/mp4");
 	public static StringBuilder errorLog;
 	// kiểm tra xem có sendtoserver hay ko 
-	public static int sendToServer = 1; // 1 -> send to server
+	public static int sendToServer = 0; // 1 -> send to server
 	
 	// Current time
 	public static String getCurrentDateTime(String format) {

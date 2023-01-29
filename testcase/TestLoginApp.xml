@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Test login fourway app">
+    <test thread-count="5" name="Test login fourway app">
+        <parameter name="type" value="app" />
+        <parameter name="author" value="Trung dv" />
+        <parameter name="deviceName" value="Pixel 4 API 29" />
+        <parameter name="udid" value="emulator-5554" />
+        <parameter name="platformName" value="Android" />
+        <parameter name="platformVersion" value="11" />
+        <parameter name="appPackage" value="com.trungdv123.redditApp" />
+        <parameter name="appActivity" value="com.trungdv123.redditApp.MainActivity" />
+        <parameter name="bareURL" value="none" />
+        <parameter name="chrome" value="none" />
+        <parameter name="testname" value="Test login fourway app" />
+        <parameter name="sprint" value="1" />
+        <parameter name="exelData" value="Login.xlsx>data>login" />
+        <classes>
+            <class name="Flows.LoginFourWay"></class>
+        </classes>
+    </test>
+</suite> <!-- Suite -->

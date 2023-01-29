@@ -7,11 +7,13 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -27,7 +29,6 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class setup {
@@ -162,6 +163,7 @@ public class setup {
 				driver.manage().window().maximize();
 				driver.manage().timeouts().implicitlyWait(contains.TIME_WAITING, TimeUnit.SECONDS);
 				driver.get(bareURL);
+                driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
 			} else if (type.contains("app")) {
 				// lấy những thông tin khi chạy 
@@ -172,12 +174,19 @@ public class setup {
 				String appPackage =  ctx.getCurrentXmlTest().getParameter("appPackage");
 				String appActivity =  ctx.getCurrentXmlTest().getParameter("appActivity");
 				URL url = new URL("http://127.0.0.1:4723/wd/hub");
-				appiumDriver = new AppiumDriver<>(url, configAppCapabilities(deviceName, udid,
-						platformName, platformVersion, appPackage, appActivity));
+				try {
+					appiumDriver = new AppiumDriver<>(url, configAppCapabilities(deviceName, udid,
+							platformName, platformVersion, appPackage, appActivity));
+					appiumDriver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+				}catch (Exception e){
+					System.out.printf(e.getMessage());
+					driver =  new AndroidDriver<WebElement>(url,configAppCapabilities(deviceName, udid,
+							platformName, platformVersion, appPackage, appActivity));
+					driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+				}
 			} else if (type.contains("sikuli")) {
 				screen = new Screen();
 			}
-			driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -190,10 +199,14 @@ public class setup {
 	@AfterTest
 	public void afterTest(String type) {
 		try {
-			driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-			if (type.contains("web")) {
-				if (driver != null) {
-					driver.quit();
+			if (driver != null) {
+				driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+				driver.quit();
+			}
+			if (type.contains("app")){
+				appiumDriver.manage().timeouts().implicitlyWait(0,TimeUnit.SECONDS);
+				if (appiumDriver!=null){
+					appiumDriver.quit();
 				}
 			}
 		} catch (Exception e) {
