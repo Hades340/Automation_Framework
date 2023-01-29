@@ -1,0 +1,10 @@
+{
+  "deviceName": "tên máy ",
+  "udid": "mã máy chạy adb devices",
+  "platformName": "Android",
+  "platformVersion": "11",
+  "skipUnlock": "true",
+  "appPackage": "com.isinolsun.app",
+  "appActivity": "com.isinolsun.app.activities.SplashActivity",
+  "noReset": "true"
+}
