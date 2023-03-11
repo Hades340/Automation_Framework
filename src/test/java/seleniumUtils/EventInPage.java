@@ -6,7 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import utils.UtilsActions;
-
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.Action;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -161,4 +162,17 @@ public class EventInPage {
 		}
 		return result;
 	}
-}
+	public boolean hoverToElement(WebDriver driver, By findElementBy){
+		boolean result = false;
+		try {
+			WebElement element = driver.findElement(findElementBy);
+			Actions action = new Actions(driver);
+			action.moveToElement(element).build().perform();
+		}catch (Exception e){
+			result = false;
+			System.out.println(e.getMessage());
+			UtilsActions.saveErrorToLog(e.getMessage());
+		}
+		return result;
+	}
+ }
